@@ -15,8 +15,18 @@ def DatabaseConnection():
 
 DatabaseConnection() # Pour s'assurer qu'on sache directement qu'on est bien connectés
 
-# AFFICHAGE DU MENU SEULEMENT
-def AfficherMenu():
+# Affichage du menu : fonction AfficherMenu()
+    # MESSAGE DE BIENVENU
+    # MONTRER LES CHOIX
+
+# Menu affiché, ensuite, sélection du joueur : fonction ChoixJoueur()
+    # Demande au joueur ce qu'il souhaite faire
+    # Gérer les soucis avec vérifs (chiffre 1 ou 2 ou 3, conversion en int)
+    # Selon choix du joueur :
+        # Si démarrer jeu alors appel fonction StartGame
+        # Si Afficher classement alors appel fonction ShowScoreboard
+        # Si quitter jeu alors appel fonction CloseGame
+def Menu():
     print("-----------------------")
     print("WELCOME !")
     print("-----------------------")
@@ -27,7 +37,7 @@ def AfficherMenu():
     print("(3) : QUITTER LE JEU")
 
 
-AfficherMenu()
+Menu()
 
 
 
