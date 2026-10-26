@@ -15,8 +15,19 @@ def DatabaseConnection():
 
 DatabaseConnection() # Pour s'assurer qu'on sache directement qu'on est bien connectés
 
-# Je dois maintenant afficher le menu
-# On va créer la fonction, le professeur m'a appris une manière intelligente de le faire
-# En temps normal j'aurai bêtement fait la sélection aussi directement dans cette fonction
-# Mais cette fois j'ai compris, ELLE DOIT JUSTE AFFICHER LE MENU rien d'autre
+# AFFICHAGE DU MENU SEULEMENT
+def AfficherMenu():
+    print("-----------------------")
+    print("WELCOME !")
+    print("-----------------------")
+
+    print("Choisissez une option (entre 1 et 3):")
+    print("(1) : DÉMARRER LE JEU")
+    print("(2) : AFFICHER LE CLASSEMENT")
+    print("(3) : QUITTER LE JEU")
+
+
+AfficherMenu()
+
+
 
