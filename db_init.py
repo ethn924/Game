@@ -14,13 +14,18 @@
 #     Récupérer tous les documents avec find() et les convertir en liste
 #     Retourner la liste des scores
 
-# Fonction pour récupérer les héros bruts : get_all_heroes()
+# Fonction pour sauvegarder un score : save_score(player_name, waves)
+#     Se connecter à la BDD en appelant database_connection()
+#     Accéder à la collection scores
+#     Insérer un nouveau document contenant player_name et le nombre de waves
+
+# Fonction pour récupérer les héros : get_all_heroes()
 #     Se connecter à la BDD en appelant database_connection()
 #     Cible la collection heroes
 #     Effectuer un find en appliquant un filtre pour enlever le _id (ex: find({}, {"_id": 0}))
 #     Convertir le curseur MongoDB en liste heroes_list et la retourner
 
-# Fonction pour récupérer les monstres bruts : get_all_monsters()
+# Fonction pour récupérer les monstres : get_all_monsters()
 #     Se connecter à la BDD en appelant database_connection()
 #     Accéder à la collection monsters
 #     Récupérer tous les documents (monstres) avec find
@@ -46,6 +51,15 @@ def get_all_scores():
     scores_list = list(scores_collection.find()) # Récupération des scores
 
     return scores_list
+
+def save_score(player_name, waves):
+    client, game = database_connection()
+    scores_collection = game["scores"]
+    
+    # J'ajoute le score du joueur et attention insert_one veut un dictionnaire
+    add_score = scores_collection.insert_one({"player_name": player_name, "waves": waves})
+
+    return "Votre score a été sauvegardé !"
 
 def get_all_heroes():
     client, game = database_connection() # Connexion BDD

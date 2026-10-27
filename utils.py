@@ -17,16 +17,26 @@
 #     Convertir la chaîne reçue en entier int
 #     Retourner l'entier obtenu
 
+# Calcul des dégâts infligés (pour le combat) : calculate_damage(attaque, defense)
+#     L'énoncé stipule que la défense réduit les dégâts.
+#     Calculer les dégâts : attaque - defense
+#     Si le résultat est inférieur ou égal à 0, retourner 0 (pour éviter de soigner l'adversaire)
+#     Sinon, retourner le résultat
+
 # Sélection et validation du choix du joueur : fonction player_choice(max_options, error_function)
-#     La fonction reçoit deux paramètres : max_options (le nombre maximum de choix possibles) et error_function (la fonction d'affichage à rappeler en cas d'erreur, provenant du fichier models.py).
+#     La fonction reçoit deux paramètres : max_options (le nombre maximum de choix possibles) 
+#         et error_function (la fonction d'affichage à rappeler en cas d'erreur, 
+#         provenant du fichier models.py).
 #     while True:
 #         Récupérer le choix utilisateur avec un input
-#         Vérifier si le choix est bien un nombre avec la méthode isdigit() (qui doit être suivie de parenthèses)
+#         Vérifier si le choix est bien un nombre avec la méthode isdigit() 
+#             (qui doit être suivie de parenthèses)
 #         Si ce n'est pas un nombre (isdigit renvoie False) :
 #             Lancer display_error("not_a_number")
 #             Appeler error_function() pour réafficher le menu ou l'interface
 #             continue pour forcer un nouveau choix
-#         Appeler la fonction convert_to_int() pour transformer la chaîne saisie en entier et stocker le résultat
+#         Appeler la fonction convert_to_int() pour transformer la chaîne saisie en entier 
+#             et stocker le résultat
 #         Vérifier si l'entier obtenu n'est pas compris entre 1 et max_options
 #         Si l'entier est hors des bornes :
 #             Lancer display_error("out_of_bounds")
