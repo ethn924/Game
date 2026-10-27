@@ -17,8 +17,6 @@ def database_connection():
 
 database_connection()  # Pour s'assurer qu'on sache directement qu'on est bien connectés
 
-# Première étape : lancement de la partie
-
 # Affichage du menu : fonction display_menu()
 # MESSAGE DE BIENVENU
 # MONTRER LES CHOIX
@@ -36,28 +34,25 @@ database_connection()  # Pour s'assurer qu'on sache directement qu'on est bien c
 
 
 def display_menu():
-    print("-" * 23)
-    print("WELCOME !")
-    print("-" * 23)
-    print("Choisissez une option (entre 1 et 3):")
-    print("(1) : DÉMARRER LE JEU")
-    print("(2) : AFFICHER LE CLASSEMENT")
-    print("(3) : QUITTER LE JEU")
-
+  print("-" * 23)
+  print("WELCOME !")
+  print("-" * 23)
+  print("Choisissez une option (entre 1 et 3):")
+  print("(1) : DÉMARRER LE JEU")
+  print("(2) : AFFICHER LE CLASSEMENT")
+  print("(3) : QUITTER LE JEU")
 
 def player_choice():
     player_choice = input("Entrez ici : ")
-    if not (player_choice.isdigit()):
+    while not (player_choice.isdigit()):
         print("Veuillez entrer un nombre (1 - 2 - 3)")
         display_menu()
-        print(player_choice)
-        
-
+        player_choice = input("Entrez ici : ")
+       
 
 def convert_to_int(player_choice):
-    player_choice = int(player_choice)
-    return player_choice
-
+   player_choice = int(player_choice)
+   return player_choice
 
 display_menu()
 player_choice()
