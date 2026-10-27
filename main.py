@@ -17,6 +17,12 @@ def database_connection():
 
 database_connection()  # Pour s'assurer qu'on sache directement qu'on est bien connectés
 
+# Méthode pour récupérer des documents d'une base :
+# ouvrir base
+# accéder à la collection souhaitée
+# find
+# convertir curseur en list
+
 # Affichage du menu : fonction display_menu()
 # MESSAGE DE BIENVENU
 # MONTRER LES CHOIX
@@ -33,8 +39,18 @@ database_connection()  # Pour s'assurer qu'on sache directement qu'on est bien c
         # Récupère les héros dans la BDD et les mets dans la liste heroes_list
         # Retourne cette liste
         # Appel de la fonction display_heroes
-# Création de la fonction display_heroes(heroes_list):
-# Reçoit la liste retournée par start_game et s'occupe de bien l'afficher
+            # Création de la fonction display_heroes(heroes_list):
+                # Reçoit la liste retournée par start_game() et s'occupe de bien l'afficher
+
+# Si afficher les scores (2) :
+    # Appel de la fonction show_scoreboard()
+        # récupérer scores dans la base
+        # accéder à la collection score
+        # find
+        # filtrer les 3 meilleurs
+            # trie le tableau sur element.waves
+            # prendre les 3 derniers éléments : mon_array [-3, -1]
+        # Afficher les 3 meilleurs
 
 # Fonction pour créer l'équipe du joueur : create_team(), équipe de 3 max
 
@@ -80,7 +96,7 @@ def player_choice():
 
     return player_choice_int
 
-
+# Récupère les héros de la BDD et les affiche sous forme de liste
 def start_game():
     print("Chargement...")
     heroes_list = []
@@ -88,12 +104,25 @@ def start_game():
     client, game = database_connection()
 
     # Je cible la collection heroes
-    heroes_collection = db_name["heroes"]
+    heroes_collection = game["heroes"]
 
     # Joli affichage pour que le joueur puisse choisir tranquillement
     # Si 0 (false) pas d'affichage, si 1 (true) affichage
     manage_heroes_display = {"_id":0, "nom":1, "type":1, "attaque":1, "defense":1, "pv": 1}
+
+    # On convertit nos données en liste
+    heroes_list = (heroes_collection.find({}, manage_heroes_display))
+    display_heroes_list(heroes_list)
     return heroes_list
+
+def display_heroes_list(heroes_list):
+    print("Choisissez 3 héros !")
+    
+    # Afficher les éléments du dictionnaire 1 à 1
+    for cle, valeur in heroes_list.items():
+        # Clés = nom, type, attaque, defense, pv
+        # Valeurs = 
+        print(f"[{cle}] {valeur}")
 
 
 # Main Programme
@@ -105,3 +134,6 @@ player_choice_int = player_choice()
 
 if player_choice_int == 1:
     start_game()
+
+if player_choice_int == 3:
+    raise SystemExit()
