@@ -1,3 +1,6 @@
+from db_init import *
+
+
 # Fonction de lancement de la partie : start_game()
 #     Appeler get_all_heroes() de db_init.py pour récupérer la liste
 #     Gestion des équipes : Saisie du nom du joueur avant la création d'une équipe
@@ -41,3 +44,7 @@
 #     Appeler get_all_monsters() de db_init.py pour récupérer la liste des monstres
 #     Sélectionner un monstre au hasard dans la liste
 #     Retourner le dictionnaire du monstre choisi avec ses caractéristiques propres
+
+def start_game():
+    get_all_heroes()
+    player_name = input("Entrez votre pseudo : ")

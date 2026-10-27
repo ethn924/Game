@@ -15,3 +15,10 @@
 #         Afficher Composition actuelle de votre équipe :
 #         Boucle sur les éléments de player_team avec un index visuel :
 #             Afficher [Numéro] Nom du personnage - X ATK - X DEF - X PV
+
+# Global configuration
+MENU = ["Démarrer le jeu", "Afficher le tableau des scores", "Quitter le jeu"]
+
+def display_menu():
+    for i in range(len(MENU)):
+        print(i + 1, ":", MENU[i])

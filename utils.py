@@ -71,14 +71,17 @@ def convert_to_int(player_choice):
 def player_choice(max_options, error_function):
     while True:
         player_choice = input("Faites votre choix : ")
-        if not (player_choice.isdigit):
+
+        if not (player_choice.isdigit()):
             display_error("not_a_number")
             error_function()
             continue
-        convert_to_int(player_choice)
-        if player_choice < 1 or player_choice > max_options:
+
+        choix_entier = convert_to_int(player_choice)
+
+        if choix_entier < 1 or choix_entier > max_options:
             display_error("out_of_bounds")
             error_function()
             continue
         else:
-            return player_choice
+            return choix_entier
