@@ -24,6 +24,14 @@ database_connection()  # Pour s'assurer qu'on sache directement qu'on est bien c
 # convertir curseur en list
 
 # Affichage du menu : fonction display_menu()
+# display_menu():
+    # config globale : tableau contenant des string : MENU =
+    # ["Lancer Jeu",
+    # "Afficher les scores",
+    # "Quitter le jeu"
+    # ]
+    # Boucle sur tout élément de MENU
+    # Afficher numéro élément et texte élément
 # MESSAGE DE BIENVENU
 # MONTRER LES CHOIX
 
@@ -52,20 +60,24 @@ database_connection()  # Pour s'assurer qu'on sache directement qu'on est bien c
             # prendre les 3 derniers éléments : mon_array [-3, -1]
         # Afficher les 3 meilleurs
 
+# Si quitter le jeu (3) :
+    # Raise SystemExit()
+
 # Fonction pour créer l'équipe du joueur : create_team(), équipe de 3 max
 
 # Si Afficher classement alors appel fonction show_scoreboard()
 # Si quitter jeu alors appel fonction close_game()
 
-
+# Config globale :
+MENU = [
+    "Démarrer le jeu",
+    "Afficher le tableau des scores",
+    "Quitter le jeu"
+]
 def display_menu():
-    print("-" * 23)
-    print("WELCOME !")
-    print("-" * 23)
-    print("Choisissez une option (entre 1 et 3):")
-    print("(1) : DÉMARRER LE JEU")
-    print("(2) : AFFICHER LE CLASSEMENT")
-    print("(3) : QUITTER LE JEU")
+    for i in range(len(MENU)):
+        print(f"{i + 1}. {MENU[i]}")
+
 
 
 # Conversion du choix en int
