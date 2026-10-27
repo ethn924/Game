@@ -9,18 +9,19 @@
 #     Retourner le client et la BDD game
 
 # Fonction pour récupérer les scores bruts : get_all_scores()
-#     Se connecter à la BDD
+#     Se connecter à la BDD en appelant database_connection()
 #     Accéder à la collection scores
-#     Récupérer tous les documents avec find() et les retourner
+#     Récupérer tous les documents avec find() et les convertir en liste
+#     Retourner la liste des scores
 
 # Fonction pour récupérer les héros bruts : get_all_heroes()
-#     Se connecter à la BDD
+#     Se connecter à la BDD en appelant database_connection()
 #     Cible la collection heroes
-#     Effectuer un find en appliquant un filtre pour enlever le _id
+#     Effectuer un find en appliquant un filtre pour enlever le _id (ex: find({}, {"_id": 0}))
 #     Convertir le curseur MongoDB en liste heroes_list et la retourner
 
 # Fonction pour récupérer les monstres bruts : get_all_monsters()
-#     Se connecter à la BDD
+#     Se connecter à la BDD en appelant database_connection()
 #     Accéder à la collection monsters
 #     Récupérer tous les documents (monstres) avec find
 #     Convertir le curseur MongoDB en liste de monstres et la retourner

@@ -18,19 +18,19 @@
 #     Retourner l'entier obtenu
 
 # Sélection et validation du choix du joueur : fonction player_choice(max_options, error_function)
-#     (Note : error_function recevra dynamiquement les fonctions d'affichage display_menu ou display_heroes_list depuis models.py)
+#     La fonction reçoit deux paramètres : max_options (le nombre maximum de choix possibles) et error_function (la fonction d'affichage à rappeler en cas d'erreur, provenant du fichier models.py).
 #     while True:
 #         Récupérer le choix utilisateur avec un input
-#         Vérifier si le choix est bien un nombre avec isdigit()
+#         Vérifier si le choix est bien un nombre avec la méthode isdigit() (qui doit être suivie de parenthèses)
 #         Si ce n'est pas un nombre (isdigit renvoie False) :
 #             Lancer display_error("not_a_number")
-#             Lancer error_function() pour réafficher le menu
+#             Appeler error_function() pour réafficher le menu ou l'interface
 #             continue pour forcer un nouveau choix
-#         Appeler la fonction convert_to_int() pour transformer la chaîne saisie en entier
+#         Appeler la fonction convert_to_int() pour transformer la chaîne saisie en entier et stocker le résultat
 #         Vérifier si l'entier obtenu n'est pas compris entre 1 et max_options
 #         Si l'entier est hors des bornes :
 #             Lancer display_error("out_of_bounds")
-#             Lancer error_function() pour réafficher le menu
+#             Appeler error_function() pour réafficher le menu ou l'interface
 #             continue pour forcer un nouveau choix
 #         Si le choix est valide :
 #             return le choix converti en entier
@@ -77,11 +77,11 @@ def player_choice(max_options, error_function):
             error_function()
             continue
 
-        choix_entier = convert_to_int(player_choice)
+        int_choice = convert_to_int(player_choice)
 
-        if choix_entier < 1 or choix_entier > max_options:
+        if int_choice < 1 or int_choice > max_options:
             display_error("out_of_bounds")
             error_function()
             continue
         else:
-            return choix_entier
+            return int_choice
