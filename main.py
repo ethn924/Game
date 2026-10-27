@@ -76,7 +76,7 @@ MENU = [
 ]
 def display_menu():
     for i in range(len(MENU)):
-        print(f"{i + 1}. {MENU[i]}")
+        print(i + 1, MENU[i])
 
 
 
@@ -123,7 +123,7 @@ def start_game():
     manage_heroes_display = {"_id":0, "nom":1, "type":1, "attaque":1, "defense":1, "pv": 1}
 
     # On convertit nos données en liste
-    heroes_list = (heroes_collection.find({}, manage_heroes_display))
+    heroes_list = list(heroes_collection.find({}, manage_heroes_display))
     display_heroes_list(heroes_list)
     return heroes_list
 
