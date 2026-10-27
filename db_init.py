@@ -45,32 +45,38 @@ def database_connection():
     print("Connexion réussie, bienvenue !")
     return client, game
 
+
 def get_all_scores():
-    client, game = database_connection() # Connexion BDD
-    scores_collection = game["scores"] # Accès à collection scores
-    scores_list = list(scores_collection.find()) # Récupération des scores
+    client, game = database_connection()  # Connexion BDD
+    scores_collection = game["scores"]  # Accès à collection scores
+    scores_list = list(scores_collection.find())  # Récupération des scores
 
     return scores_list
+
 
 def save_score(player_name, waves):
     client, game = database_connection()
     scores_collection = game["scores"]
-    
+
     # J'ajoute le score du joueur et attention insert_one veut un dictionnaire
-    add_score = scores_collection.insert_one({"player_name": player_name, "waves": waves})
+    add_score = scores_collection.insert_one(
+        {"player_name": player_name, "waves": waves}
+    )
 
     return "Votre score a été sauvegardé !"
 
+
 def get_all_heroes():
-    client, game = database_connection() # Connexion BDD
-    heroes_collection = game["heroes"] # Accès à collection heroes
-    heroes_list = list(heroes_collection.find()) # Récupération des héros
+    client, game = database_connection()  # Connexion BDD
+    heroes_collection = game["heroes"]  # Accès à collection heroes
+    heroes_list = list(heroes_collection.find({}, {"_id": 0})) # Récupération des héros mais je veux pas l'id
 
     return heroes_list
 
+
 def get_all_monsters():
-    client, game = database_connection() # Connexion BDD
-    monsters_collection = game["monsters"] # Accès à la collection monsters
-    monsters_list = list(monsters_collection.find()) # Récupération des monstres
-    
+    client, game = database_connection()  # Connexion BDD
+    monsters_collection = game["monsters"]  # Accès à la collection monsters
+    monsters_list = list(monsters_collection.find())  # Récupération des monstres
+
     return monsters_list
