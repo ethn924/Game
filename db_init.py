@@ -53,3 +53,10 @@ def get_all_heroes():
     heroes_list = list(heroes_collection.find()) # Récupération des héros
 
     return heroes_list
+
+def get_all_monsters():
+    client, game = database_connection() # Connexion BDD
+    monsters_collection = game["monsters"] # Accès à la collection monsters
+    monsters_list = list(monsters_collection.find()) # Récupération des monstres
+    
+    return monsters_list

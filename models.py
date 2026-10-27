@@ -15,8 +15,8 @@
 #         Afficher un message indiquant que l'équipe est actuellement vide
 #     Sinon :
 #         Afficher un message d'introduction indiquant la composition actuelle de l'équipe
-#         Boucler sur les éléments du dictionnaire player_team en gardant un index visuel :
-#             Afficher le numéro de l'index, le nom du personnage, ainsi que ses statistiques d'attaque, de défense et de pv
+#         Boucler sur les éléments du dictionnaire player_team (utiliser .items() pour récupérer la clé et la valeur) en gardant un index visuel :
+#             Afficher le numéro de l'index, le nom du personnage (la clé), ainsi que ses statistiques d'attaque, de défense et de pv (les valeurs du dictionnaire interne)
 
 # Global configuration
 MENU = ["Démarrer le jeu", "Afficher le tableau des scores", "Quitter le jeu"]
@@ -24,3 +24,17 @@ MENU = ["Démarrer le jeu", "Afficher le tableau des scores", "Quitter le jeu"]
 def display_menu():
     for i in range(len(MENU)):
         print(i + 1, ":", MENU[i])
+
+def display_current_team(player_team):
+    if player_team == {}:
+        print("ÉQUIPE ACTUELLE VIDE")
+    else:
+        print("-" * 23)
+        print("Voici votre composition actuelle : ")
+        print("-" * 23)
+
+        for i, (nom, stats) in enumerate(player_team.items()):
+            print(f"{i + 1}. {nom} - {stats['attaque']} ATK - {stats['defense']} DEF - {stats['pv']} PV")
+
+def display_heroes_list(heroes_list):
+    

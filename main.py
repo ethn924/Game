@@ -28,7 +28,7 @@ def close_game():
 database_connection()
 # Affichage du menu
 display_menu()
-# Récupération du choix du joueur, pour l'instant que 3 options disponible
+# Récupération du choix du joueur, pour l'instant que 3 options disponibles
 choix = player_choice(max_options=3, error_function=display_menu)
 
 if choix == 1:
