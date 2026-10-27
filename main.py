@@ -17,6 +17,8 @@ def database_connection():
 
 database_connection()  # Pour s'assurer qu'on sache directement qu'on est bien connectés
 
+# Première étape : lancement de la partie
+
 # Affichage du menu : fonction display_menu()
 # MESSAGE DE BIENVENU
 # MONTRER LES CHOIX
@@ -46,7 +48,10 @@ def display_menu():
 def player_choice():
     player_choice = input("Entrez ici : ")
     if not (player_choice.isdigit()):
-        convert_to_int()
+        print("Veuillez entrer un nombre (1 - 2 - 3)")
+        display_menu()
+        print(player_choice)
+        
 
 
 def convert_to_int(player_choice):
