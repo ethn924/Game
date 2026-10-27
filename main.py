@@ -1,151 +1,93 @@
-from pymongo import MongoClient
-
 # Tout d'abord je dois me connecter à ma BDD
 # Définition des variables de connexion
+# db_url = "mongodb://localhost:27017/"  Ma connection string
+# db_name = "Game"  Nom de ma BDD
 
-db_url = "mongodb://localhost:27017/"  # Ma connection string
-db_name = "Game"  # Nom de ma BDD
+# Fonction pour me connecter à la BDD : database_connection()
+#     Se connecter au client MongoClient avec db_url
+#     Accéder à la BDD avec db_name
+#     Afficher Connexion OK !
+#     Retourner le client et la BDD game
 
+# Dictionnaire global pour stocker tous les types d'erreurs explicitement balancées à l'utilisateur : ERRORS
+#     "not_a_number": "Veuillez entrer un nombre valide"
+#     "out_of_bounds": "Ce choix ne fait pas partie des options disponibles"
 
-# Fonction pour me connecter à la BDD
-def database_connection():
-    client = MongoClient(db_url)
-    game = client[db_name]
-    print("Connexion OK !")
-    return client, game
-
-
-database_connection()  # Pour s'assurer qu'on sache directement qu'on est bien connectés
-
-# Méthode pour récupérer des documents d'une base :
-# ouvrir base
-# accéder à la collection souhaitée
-# find
-# convertir curseur en list
+# Fonction d'affichage des erreurs : display_error(error_key)
+#     Chercher le message associé au mot-clé error_key dans le dictionnaire ERRORS
+#     Afficher le message d'erreur récupéré
 
 # Affichage du menu : fonction display_menu()
-# display_menu():
-    # config globale : tableau contenant des string : MENU =
-    # ["Lancer Jeu",
-    # "Afficher les scores",
-    # "Quitter le jeu"
-    # ]
-    # Boucle sur tout élément de MENU
-    # Afficher numéro élément et texte élément
-# MESSAGE DE BIENVENU
-# MONTRER LES CHOIX
+#     config globale : tableau contenant des string : MENU = ["Démarrer le jeu", "Afficher le tableau des scores", "Quitter le jeu"]
+#     Boucle sur tout élément de MENU
+#         Afficher numéro élément et texte élément
 
-# Menu affiché, ensuite, sélection du joueur : fonction player_choice()
-# fonction player_choice():
-# Demande au joueur ce qu'il souhaite faire
-# Gérer les soucis avec vérifs (chiffre 1 ou 2 ou 3, conversion en int, conversion avec fonction convert_to_int)
-# On va utiliser player_choice_int (résultat de la conversion en int de player_choice) pour faciliter
+# Affichage des héros : fonction display_heroes_list(heroes_list)
+#     Reçoit la liste retournée par start_game()
+#     Afficher Choisissez 3 héros !
+#     Boucle sur la liste pour extraire chaque héros
+#         Extraire et afficher proprement les caractéristiques nom, type, attaque, defense, pv de manière lisible
 
-# Selon choix du joueur :
-# Si démarrer jeu (1) alors appel fonction start_game()
-    # Fonction start_game():
-        # Récupère les héros dans la BDD et les mets dans la liste heroes_list
-        # Retourne cette liste
-        # Appel de la fonction display_heroes
-            # Création de la fonction display_heroes(heroes_list):
-                # Reçoit la liste retournée par start_game() et s'occupe de bien l'afficher
+# Conversion du choix en int : fonction convert_to_int(player_choice)
+#     Convertir la chaîne reçue en entier int
+#     Retourner l'entier obtenu
 
-# Si afficher les scores (2) :
-    # Appel de la fonction show_scoreboard()
-        # récupérer scores dans la base
-        # accéder à la collection score
-        # find
-        # filtrer les 3 meilleurs
-            # trie le tableau sur element.waves
-            # prendre les 3 derniers éléments : mon_array [-3, -1]
-        # Afficher les 3 meilleurs
+# Menu affiché, ensuite, sélection du joueur : fonction player_choice(max_options, error_function)
+#     while True:
+#         Récupérer choix utilisateur avec un input
+#         Vérifier si choix est valide
+#         Si choix pas un nombre avec isdigit() alors :
+#             Lancer display_error("not_a_number")
+#             Lancer error_function()
+#             continue
+#         Conversion du choix avec la fonction convert_to_int
+#         Si choix exprimé en int pas entre 1 et max_options alors :
+#             Lancer display_error("out_of_bounds")
+#             Lancer error_function()
+#             continue
+#         Si valide alors :
+#             return le choix converti en entier
 
-# Si quitter le jeu (3) :
-    # Raise SystemExit()
+# Selon choix du joueur : si démarrer jeu (1) alors appel fonction start_game()
+# Fonction start_game():
+#     Se connecter à la BDD pour faire la requête avec database_connection()
+#     Cible la collection heroes
+#     Effectuer un find en appliquant un filtre pour enlever le _id
+#     Convertir le curseur MongoDB en liste heroes_list
+#     Appeler la fonction display_heroes_list(heroes_list)
+#     Passer à la création de l'équipe avec create_team(heroes_list)
+#     Retourner cette liste
 
-# Fonction pour créer l'équipe du joueur : create_team(), équipe de 3 max
+# Fonction pour créer l'équipe du joueur : create_team(heroes_list)
+#     Initialiser une liste vide pour l'équipe du joueur, équipe de 3 max
+#     Boucler 3 fois tant que l'équipe n'est pas pleine :
+#         Appeler player_choice en lui passant le nombre maximum de héros disponibles et la fonction display_heroes_list
+#         Récupérer le héros sélectionné dans heroes_list grâce au choix renvoyé
+#         Ajouter le héros à l'équipe du joueur
+#     Afficher ou retourner l'équipe finale
 
-# Si Afficher classement alors appel fonction show_scoreboard()
-# Si quitter jeu alors appel fonction close_game()
+# Si afficher les scores (2) alors appel de la fonction show_scoreboard()
+# Fonction show_scoreboard():
+#     Se connecter à la BDD avec database_connection()
+#     Accéder à la collection scores
+#     Récupérer tous les documents avec find
+#     Filtrer les 3 meilleurs :
+#         Trier le tableau sur element.waves
+#         Prendre les 3 derniers éléments du tableau avec mon_array[-3:]
+#     Afficher les 3 meilleurs
 
-# Config globale :
-MENU = [
-    "Démarrer le jeu",
-    "Afficher le tableau des scores",
-    "Quitter le jeu"
-]
-def display_menu():
-    for i in range(len(MENU)):
-        print(i + 1, MENU[i])
-
-
-
-# Conversion du choix en int
-def convert_to_int(player_choice):
-    player_choice = int(player_choice)
-    return player_choice
-
-
-# Récupérer le choix du joueur et gérer ses bêtises
-def player_choice():
-    player_choice = input("Entrez ici : ")
-    while not (player_choice.isdigit()):
-        print("Veuillez entrer un nombre (1 - 2 - 3)")
-        display_menu()
-        player_choice = input("Entrez ici : ")
-
-    player_choice_int = convert_to_int(player_choice)
-
-    while not (1 <= player_choice_int <= 3):
-        print("Veuillez entrer un nombre (1 - 2 - 3)")
-        display_menu()
-        player_choice = input("Entrez ici : ")
-        while not (player_choice.isdigit()):
-            print("Veuillez entrer un nombre (1 - 2 - 3)")
-            display_menu()
-            player_choice = input("Entrez ici : ")
-        player_choice_int = convert_to_int(player_choice)
-
-    return player_choice_int
-
-# Récupère les héros de la BDD et les affiche sous forme de liste
-def start_game():
-    print("Chargement...")
-    heroes_list = []
-    # Je me connecte à la BDD pour faire ma requête
-    client, game = database_connection()
-
-    # Je cible la collection heroes
-    heroes_collection = game["heroes"]
-
-    # Joli affichage pour que le joueur puisse choisir tranquillement
-    # Si 0 (false) pas d'affichage, si 1 (true) affichage
-    manage_heroes_display = {"_id":0, "nom":1, "type":1, "attaque":1, "defense":1, "pv": 1}
-
-    # On convertit nos données en liste
-    heroes_list = list(heroes_collection.find({}, manage_heroes_display))
-    display_heroes_list(heroes_list)
-    return heroes_list
-
-def display_heroes_list(heroes_list):
-    print("Choisissez 3 héros !")
-    
-    # Afficher les éléments du dictionnaire 1 à 1
-    for cle, valeur in heroes_list.items():
-        # Clés = nom, type, attaque, defense, pv
-        # Valeurs = 
-        print(f"[{cle}] {valeur}")
-
+# Si quitter le jeu (3) alors appel de la fonction close_game()
+# Fonction close_game():
+#     Afficher un message de fermeture
+#     Quitter proprement avec raise SystemExit()
 
 # Main Programme
-
-display_menu()
-
-
-player_choice_int = player_choice()
-
-if player_choice_int == 1:
-    start_game()
-
-if player_choice_int == 3:
-    raise SystemExit()
+# Établir ou vérifier la connexion initiale à la BDD
+# Afficher le menu principal une première fois avec display_menu()
+# Récupérer le choix initial du joueur avec player_choice en lui passant max_options=3 et error_function=display_menu
+# Si choix égal 1 alors :
+#     Appel start_game()
+# Si choix égal 2 alors :
+#     Appel show_scoreboard()
+# Si choix égal 3 alors :
+#     Appel close_game()
