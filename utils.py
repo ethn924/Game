@@ -17,39 +17,68 @@
 #     Convertir la chaîne reçue en entier int
 #     Retourner l'entier obtenu
 
-# Menu affiché, ensuite, sélection du joueur : fonction player_choice(max_options, error_function)
+# Sélection et validation du choix du joueur : fonction player_choice(max_options, error_function)
+#     (Note : error_function recevra dynamiquement les fonctions d'affichage display_menu ou display_heroes_list depuis models.py)
 #     while True:
-#         Récupérer choix utilisateur avec un input
-#         Vérifier si choix est valide
-#         Si choix pas un nombre avec isdigit() alors :
+#         Récupérer le choix utilisateur avec un input
+#         Vérifier si le choix est bien un nombre avec isdigit()
+#         Si ce n'est pas un nombre (isdigit renvoie False) :
 #             Lancer display_error("not_a_number")
-#             Lancer error_function()
-#             continue
-#         Conversion du choix avec la fonction convert_to_int
-#         Si choix exprimé en int pas entre 1 et max_options alors :
+#             Lancer error_function() pour réafficher le menu
+#             continue pour forcer un nouveau choix
+#         Appeler la fonction convert_to_int() pour transformer la chaîne saisie en entier
+#         Vérifier si l'entier obtenu n'est pas compris entre 1 et max_options
+#         Si l'entier est hors des bornes :
 #             Lancer display_error("out_of_bounds")
-#             Lancer error_function()
-#             continue
-#         Si valide alors :
+#             Lancer error_function() pour réafficher le menu
+#             continue pour forcer un nouveau choix
+#         Si le choix est valide :
 #             return le choix converti en entier
+
 
 # Dictionnaire d'erreurs
 ERRORS = {
     "not_a_number": "Veuillez entrer un nombre valide",
     "out_of_bounds": "Ce choix ne fait pas partie des options disponibles",
     "hero_already_chosen": "Ce héros est déjà dans votre équipe, choisissez-en un autre",
-    "invalid_name": "Le nom choisi n'est pas valide (il ne doit pas être vide ou contenir uniquement des espaces)"
+    "invalid_name": "Le nom choisi n'est pas valide (il ne doit pas être vide ou contenir uniquement des espaces)",
 }
 
-def is_valid_name(player_name):
-    player_name.strip()
 
-    if (player_name == ""):  # noqa: SIM103
+def is_valid_name(player_name):
+
+    player_name = player_name.strip()
+
+    if player_name == "":  # noqa: SIM103
         return False
-    else :
+    else:
         return True
 
+
 def display_error(error_key):
-    
-    message = ERRORS.get(error_key, "Une erreur inconnue est survenue.") # Si problèmes avec les clés
+    message = ERRORS.get(
+        error_key, "Une erreur inconnue est survenue."
+    )  # Si clé absente ou problèmes
     print(message)
+
+
+def convert_to_int(player_choice):
+    player_choice_int = int(player_choice)
+
+    return player_choice_int
+
+
+def player_choice(max_options, error_function):
+    while True:
+        player_choice = input("Faites votre choix : ")
+        if not (player_choice.isdigit):
+            display_error("not_a_number")
+            error_function()
+            continue
+        convert_to_int(player_choice)
+        if player_choice < 1 or player_choice > max_options:
+            display_error("out_of_bounds")
+            error_function()
+            continue
+        else:
+            return player_choice

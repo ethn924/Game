@@ -38,9 +38,6 @@
 # Phase 2 : COMBAT
 # Sélectionner un mot aléatoire, fonction qui va être appelée à chaque nouvelle wave : SelectRandomMonster()
 # Fonction SelectRandomMonster():
-#     Connexion à la db avec database_connection()
-#     Accéder à la collection monsters
-#     Récupérer tous les documents (monstres) avec find
-#     Convertir le curseur MongoDB en liste de monstres
+#     Appeler get_all_monsters() de db_init.py pour récupérer la liste des monstres
 #     Sélectionner un monstre au hasard dans la liste
 #     Retourner le dictionnaire du monstre choisi avec ses caractéristiques propres

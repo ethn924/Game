@@ -19,6 +19,12 @@
 #     Effectuer un find en appliquant un filtre pour enlever le _id
 #     Convertir le curseur MongoDB en liste heroes_list et la retourner
 
+# Fonction pour récupérer les monstres bruts : get_all_monsters()
+#     Se connecter à la BDD
+#     Accéder à la collection monsters
+#     Récupérer tous les documents (monstres) avec find
+#     Convertir le curseur MongoDB en liste de monstres et la retourner
+
 
 from pymongo import MongoClient
 
