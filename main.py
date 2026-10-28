@@ -2,12 +2,14 @@ from db_init import *
 from game import *
 from models import *
 from utils import *
+import time
 
 # Fonction pour quitter proprement : close_game()
 #     Afficher un message de fermeture
 #     Quitter proprement avec raise SystemExit()
 def close_game():
     print("Fermeture du jeu...")
+    time.sleep(1)
     raise SystemExit()  # On sort du programme
 
 
@@ -25,6 +27,8 @@ def close_game():
 
 # Établissement ou vérification de la connexion avec BDD Game
 database_connection()
+time.sleep(2)
+
 # Affichage du menu
 display_menu()
 # Récupération du choix du joueur, pour l'instant que 3 options disponibles
