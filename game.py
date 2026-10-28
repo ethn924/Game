@@ -212,7 +212,7 @@ def combat_loop(player_name, player_team):
         if defeat == True:
             print("TOUS VOS HÉROS SONT MORTS, LES MONSTRES ENVAHISSENT LE ROYAUME")
             print("DÉFAITE !")
-            print("Score final : ", waves)
+            print("Score final : ", waves - 1)
             save_score(player_name, waves - 1)
             show_scoreboard()
             break
