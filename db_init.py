@@ -37,14 +37,18 @@ def get_all_scores():
 # Fonction pour sauvegarder un score : save_score(player_name, waves)
 #     Se connecter à la BDD en appelant database_connection()
 #     Accéder à la collection scores
-#     Insérer un nouveau document contenant player_name et le nombre de waves
+#     Mettre à jour le document du joueur s'il existe déjà (en filtrant sur player_name)
+#     Si le joueur n'existe pas, l'insérer (upsert=True)
+#     Mettre à jour la valeur de "waves" avec le nouveau score
 def save_score(player_name, waves):
     client, game = database_connection()
     scores_collection = game["scores"]
 
-    # J'ajoute le score du joueur et attention insert_one veut un dictionnaire
-    add_score = scores_collection.insert_one(
-        {"player_name": player_name, "waves": waves}
+    add_score = scores_collection.update_one(
+        {"player_name": player_name},
+        {"$set": {"waves": waves}},
+        upsert=True,  # Upsert = update si j'ai déjà le joueur
+        # Sinon insert si il n'y est pas, simple
     )
 
     return "Votre score a été sauvegardé !"
@@ -58,7 +62,9 @@ def save_score(player_name, waves):
 def get_all_heroes():
     client, game = database_connection()  # Connexion BDD
     heroes_collection = game["heroes"]  # Accès à collection heroes
-    heroes_list = list(heroes_collection.find({}, {"_id": 0})) # Récupération des héros mais je veux pas l'id
+    heroes_list = list(
+        heroes_collection.find({}, {"_id": 0})
+    )  # Récupération des héros mais je veux pas l'id
 
     return heroes_list
 

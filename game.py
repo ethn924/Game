@@ -175,7 +175,7 @@ def combat_loop(player_name, player_team):
                         hero_stats["attaque"], monster["defense"]
                     )
                     monster["pv"] = monster["pv"] - hero_damage
-                    print("Dégâts infligés par ", name, " : ", hero_damage)
+                    print("Dégâts infligés par", name, ":", hero_damage)
                     if monster["pv"] <= 0:
                         combat_ongoing = False
                         break
