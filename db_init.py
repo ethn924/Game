@@ -16,7 +16,6 @@ db_name = "Game"  # Nom de ma BDD
 def database_connection():
     client = MongoClient(db_url)
     game = client[db_name]
-    # Vérification de la connexion
     print("Connexion réussie, bienvenue !")
     return client, game
 
@@ -27,10 +26,9 @@ def database_connection():
 #     Récupérer tous les documents avec find() et les convertir en liste
 #     Retourner la liste des scores
 def get_all_scores():
-    client, game = database_connection()  # Connexion BDD
-    scores_collection = game["scores"]  # Accès à collection scores
-    scores_list = list(scores_collection.find())  # Récupération des scores
-
+    client, game = database_connection()
+    scores_collection = game["scores"]
+    scores_list = list(scores_collection.find())
     return scores_list
 
 
@@ -47,8 +45,7 @@ def save_score(player_name, waves):
     add_score = scores_collection.update_one(
         {"player_name": player_name},
         {"$set": {"waves": waves}},
-        upsert=True,  # Upsert = update si j'ai déjà le joueur
-        # Sinon insert si il n'y est pas, simple
+        upsert=True,
     )
 
     return "Votre score a été sauvegardé !"
@@ -60,12 +57,9 @@ def save_score(player_name, waves):
 #     Effectuer un find en appliquant un filtre pour enlever le _id
 #     Convertir le curseur MongoDB en liste heroes_list et la retourner
 def get_all_heroes():
-    client, game = database_connection()  # Connexion BDD
-    heroes_collection = game["heroes"]  # Accès à collection heroes
-    heroes_list = list(
-        heroes_collection.find({}, {"_id": 0})
-    )  # Récupération des héros mais je veux pas l'id
-
+    client, game = database_connection()
+    heroes_collection = game["heroes"]
+    heroes_list = list(heroes_collection.find({}, {"_id": 0}))
     return heroes_list
 
 
@@ -75,8 +69,7 @@ def get_all_heroes():
 #     Récupérer tous les documents (monstres) avec find
 #     Convertir le curseur MongoDB en liste de monstres et la retourner
 def get_all_monsters():
-    client, game = database_connection()  # Connexion BDD
-    monsters_collection = game["monsters"]  # Accès à la collection monsters
-    monsters_list = list(monsters_collection.find())  # Récupération des monstres
-
+    client, game = database_connection()
+    monsters_collection = game["monsters"]
+    monsters_list = list(monsters_collection.find())
     return monsters_list
