@@ -1,8 +1,10 @@
+import time
+
 from db_init import *
 from game import *
 from models import *
 from utils import *
-import time
+
 
 # Fonction pour quitter proprement : close_game()
 #     Afficher un message de fermeture

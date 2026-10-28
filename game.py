@@ -164,7 +164,7 @@ def combat_loop(player_name, player_team):
         waves += 1
         monster = select_random_monster()
         display_combat_state(monster, player_team)
-        time.sleep(2) # Ajout : Pause pour lire les stats du monstre
+        time.sleep(2) # Pause pour que ça soit agréable le combat
 
         combat_ongoing = True
 
@@ -175,7 +175,7 @@ def combat_loop(player_name, player_team):
                         hero_stats["attaque"], monster["defense"]
                     )
                     monster["pv"] = monster["pv"] - hero_damage
-                    print("Dégâts infligés par le héro : ", hero_damage)
+                    print("Dégâts infligés par ", name, " : ", hero_damage)
                     if monster["pv"] <= 0:
                         combat_ongoing = False
                         break
