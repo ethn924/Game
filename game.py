@@ -183,7 +183,7 @@ def combat_loop(player_name, player_team):
             if not combat_ongoing:
                 break
 
-            time.sleep(1) # Ajout : Pause après l'attaque des héros
+            time.sleep(1) # Pause après l'attaque des héros
 
             alive_heroes = []
 
@@ -198,7 +198,7 @@ def combat_loop(player_name, player_team):
             target_hero["pv"] = target_hero["pv"] - monster_damage
             print("Dégâts infligés par le monstre à", target_name, ":", monster_damage)
 
-            time.sleep(1) # Ajout : Pause après l'attaque du monstre
+            time.sleep(1) # Pause après l'attaque du monstre
 
             heroes_alive = 0
             for name, stats in player_team.items():
