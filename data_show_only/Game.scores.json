@@ -1,0 +1,42 @@
+[{
+  "_id": {
+    "$oid": "6ae1dc536dea9f090d7f9c60"
+  },
+  "player_name": "sdfgg",
+  "waves": 6
+},
+{
+  "_id": {
+    "$oid": "6ae1dc536dea9f090d7f9c61"
+  },
+  "player_name": "Try 2",
+  "waves": 9
+},
+{
+  "_id": {
+    "$oid": "6ae1dc536dea9f090d7f9c62"
+  },
+  "player_name": "Try3",
+  "waves": 6
+},
+{
+  "_id": {
+    "$oid": "6ae1dc536dea9f090d7f9c63"
+  },
+  "player_name": "rme",
+  "waves": 54
+},
+{
+  "_id": {
+    "$oid": "6ae1dc536dea9f090d7f9c64"
+  },
+  "player_name": "dsfgddf",
+  "waves": 35
+},
+{
+  "_id": {
+    "$oid": "6ae1dc536dea9f090d7f9c65"
+  },
+  "player_name": "Ethan",
+  "waves": 13
+}]

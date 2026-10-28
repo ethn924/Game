@@ -1,0 +1,100 @@
+[{
+  "_id": {
+    "$oid": "6ae1d96b6dea9f090d7f9c4c"
+  },
+  "nom": "Arthur",
+  "type": "Chevalier",
+  "attaque": 70,
+  "defense": 70,
+  "pv": 350
+},
+{
+  "_id": {
+    "$oid": "6ae1d96b6dea9f090d7f9c4d"
+  },
+  "nom": "Merlin",
+  "type": "Magicien",
+  "attaque": 100,
+  "defense": 30,
+  "pv": 200
+},
+{
+  "_id": {
+    "$oid": "6ae1d96b6dea9f090d7f9c4e"
+  },
+  "nom": "Elara",
+  "type": "Archère",
+  "attaque": 80,
+  "defense": 35,
+  "pv": 230
+},
+{
+  "_id": {
+    "$oid": "6ae1d96b6dea9f090d7f9c4f"
+  },
+  "nom": "Grognak",
+  "type": "Barbare",
+  "attaque": 100,
+  "defense": 35,
+  "pv": 400
+},
+{
+  "_id": {
+    "$oid": "6ae1d96b6dea9f090d7f9c50"
+  },
+  "nom": "Eleanor",
+  "type": "Paladine",
+  "attaque": 75,
+  "defense": 85,
+  "pv": 320
+},
+{
+  "_id": {
+    "$oid": "6ae1d96b6dea9f090d7f9c51"
+  },
+  "nom": "Vax",
+  "type": "Voleur",
+  "attaque": 90,
+  "defense": 30,
+  "pv": 220
+},
+{
+  "_id": {
+    "$oid": "6ae1d96b6dea9f090d7f9c52"
+  },
+  "nom": "Aldric",
+  "type": "Prêtre",
+  "attaque": 40,
+  "defense": 55,
+  "pv": 280
+},
+{
+  "_id": {
+    "$oid": "6ae1d96b6dea9f090d7f9c53"
+  },
+  "nom": "Sylva",
+  "type": "Druidesse",
+  "attaque": 70,
+  "defense": 45,
+  "pv": 250
+},
+{
+  "_id": {
+    "$oid": "6ae1d96b6dea9f090d7f9c54"
+  },
+  "nom": "Léandre",
+  "type": "Barde",
+  "attaque": 60,
+  "defense": 35,
+  "pv": 210
+},
+{
+  "_id": {
+    "$oid": "6ae1d96b6dea9f090d7f9c55"
+  },
+  "nom": "Morgane",
+  "type": "Nécromancienne",
+  "attaque": 115,
+  "defense": 30,
+  "pv": 180
+}]

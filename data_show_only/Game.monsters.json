@@ -1,0 +1,100 @@
+[{
+  "_id": {
+    "$oid": "6ae1d9726dea9f090d7f9c56"
+  },
+  "nom": "Smaug",
+  "type": "Dragon",
+  "attaque": 85,
+  "defense": 40,
+  "pv": 800
+},
+{
+  "_id": {
+    "$oid": "6ae1d9726dea9f090d7f9c57"
+  },
+  "nom": "Gribouille",
+  "type": "Gobelin",
+  "attaque": 20,
+  "defense": 5,
+  "pv": 80
+},
+{
+  "_id": {
+    "$oid": "6ae1d9726dea9f090d7f9c58"
+  },
+  "nom": "Bouldar",
+  "type": "Troll",
+  "attaque": 50,
+  "defense": 25,
+  "pv": 300
+},
+{
+  "_id": {
+    "$oid": "6ae1d9726dea9f090d7f9c59"
+  },
+  "nom": "Fenrir",
+  "type": "Loup-garou",
+  "attaque": 45,
+  "defense": 15,
+  "pv": 250
+},
+{
+  "_id": {
+    "$oid": "6ae1d9726dea9f090d7f9c5a"
+  },
+  "nom": "Granit",
+  "type": "Golem",
+  "attaque": 60,
+  "defense": 40,
+  "pv": 450
+},
+{
+  "_id": {
+    "$oid": "6ae1d9726dea9f090d7f9c5b"
+  },
+  "nom": "Vlad",
+  "type": "Vampire",
+  "attaque": 55,
+  "defense": 20,
+  "pv": 280
+},
+{
+  "_id": {
+    "$oid": "6ae1d9726dea9f090d7f9c5c"
+  },
+  "nom": "Lerna",
+  "type": "Hydre",
+  "attaque": 70,
+  "defense": 30,
+  "pv": 500
+},
+{
+  "_id": {
+    "$oid": "6ae1d9726dea9f090d7f9c5d"
+  },
+  "nom": "Gloubi",
+  "type": "Slime",
+  "attaque": 25,
+  "defense": 10,
+  "pv": 120
+},
+{
+  "_id": {
+    "$oid": "6ae1d9726dea9f090d7f9c5e"
+  },
+  "nom": "Agatha",
+  "type": "Sorcière",
+  "attaque": 35,
+  "defense": 10,
+  "pv": 150
+},
+{
+  "_id": {
+    "$oid": "6ae1d9726dea9f090d7f9c5f"
+  },
+  "nom": "Mörk",
+  "type": "Roi Liche",
+  "attaque": 75,
+  "defense": 35,
+  "pv": 600
+}]
