@@ -18,6 +18,23 @@ from models import *
 #         et stocker le résultat dans une variable player_team
 #     Lancer la boucle de combat (combat_loop) en lui passant player_name et player_team
 #     (Le combat_loop gérera la fin de partie et l'enregistrement du score)
+def start_game():
+    heroes_list = get_all_heroes()
+
+    while True:
+        player_name = input("Entrez votre pseudo : ")
+
+        valide_name = is_valid_name(player_name)
+
+        if valide_name == True:
+            break
+        else:
+            display_error("invalid_name")
+
+    player_team = create_team(heroes_list)
+
+    return player_name, player_team
+
 
 # Sélection des personnages pour constituer une équipe : fonction create_team(heroes_list)
 #     La fonction reçoit la liste des héros disponibles
@@ -41,6 +58,32 @@ from models import *
 #             pour qu'il ne puisse plus être proposé et sélectionné au prochain tour
 #     Afficher l'équipe finale au joueur (en utilisant display_current_team)
 #     Retourner le dictionnaire player_team
+def create_team(heroes_list):
+    player_team = {}
+
+    while len(player_team) < 3:
+        print("-" * 23)
+        print("CRÉATION DE L'ÉQUIPE")
+        print("-" * 23)
+
+        display_current_team(player_team)
+        print("-" * 23)
+        print("Héros : ")
+        display_heroes_list(heroes_list)
+        
+        choice = player_choice(len(heroes_list), display_heroes_list)
+        
+        selected_hero = heroes_list[choice - 1] 
+        
+        # Ajout dans le dictionnaire
+        player_team[selected_hero["nom"]] = selected_hero
+        
+        # Plus simple d'enlever le héros de la liste
+        heroes_list.pop(choice - 1)
+        
+    display_current_team(player_team)
+    return player_team
+
 
 # Fonction de traitement et d'affichage du tableau des scores : show_scoreboard()
 #     Appeler get_all_scores() (provenant de db_init.py) pour obtenir la liste brute des scores
@@ -48,6 +91,9 @@ from models import *
 #         Trier la liste de scores en fonction du nombre de vagues atteintes (la clé waves)
 #         Prendre les 3 derniers éléments de la liste triée (les 3 plus hauts scores)
 #     Afficher proprement le podium des 3 meilleurs avec leur nom et leur score
+def show_scoreboard():
+    get_all_scores()
+
 
 # Phase 2 : COMBAT
 # Sélectionner un monstre aléatoire, fonction qui va être appelée à chaque nouvelle wave : SelectRandomMonster()
@@ -55,6 +101,7 @@ from models import *
 #     Appeler get_all_monsters() (provenant de db_init.py) pour récupérer la liste des monstres
 #     Sélectionner un monstre au hasard dans la liste (en important le module random)
 #     Retourner le dictionnaire du monstre choisi avec ses caractéristiques propres
+
 
 # Boucle de combat principale : combat_loop(player_name, player_team)
 #     Initialiser le compteur de vagues (waves) à 0
@@ -81,48 +128,3 @@ from models import *
 #             Appeler save_score(player_name, waves - 1) (provenant de db_init.py)
 #             Appeler show_scoreboard() pour afficher le classement
 #             break pour quitter la boucle de combat et retourner au menu principal
-
-
-def start_game():
-    heroes_list = get_all_heroes()
-
-    while True:
-        player_name = input("Entrez votre pseudo : ")
-
-        valide_name = is_valid_name(player_name)
-
-        if valide_name == True:
-            break
-        else:
-            display_error("invalid_name")
-
-    player_team = create_team(heroes_list)
-
-    return player_name, player_team
-
-
-def create_team(heroes_list):
-    player_team = {}
-
-    while len(player_team) < 3:
-        print("-" * 23)
-        print("CRÉATION DE L'ÉQUIPE")
-        print("-" * 23)
-
-        display_current_team(player_team)
-        print("-" * 23)
-        print("Héros : ")
-        display_heroes_list(heroes_list)
-        
-        choice = player_choice(len(heroes_list), display_heroes_list)
-        
-        selected_hero = heroes_list[choice - 1] 
-        
-        # Ajout dans le dictionnaire
-        player_team[selected_hero["nom"]] = selected_hero
-        
-        # Plus simple d'enlever le héros de la liste
-        heroes_list.pop(choice - 1)
-        
-    display_current_team(player_team)
-    return player_team

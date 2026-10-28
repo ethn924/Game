@@ -6,6 +6,10 @@ from utils import *
 # Fonction pour quitter proprement : close_game()
 #     Afficher un message de fermeture
 #     Quitter proprement avec raise SystemExit()
+def close_game():
+    print("Fermeture du jeu...")
+    raise SystemExit()  # On sort du programme
+
 
 # Main Programme
 # Établir ou vérifier la connexion initiale à la BDD avec database_connection() (provenant de db_init.py)
@@ -18,12 +22,6 @@ from utils import *
 #     Appel show_scoreboard() (provenant de game.py)
 # Si choix égal 3 alors :
 #     Appel close_game()
-
-
-def close_game():
-    print("Fermeture du jeu...")
-    raise SystemExit()  # On sort du programme
-
 
 # Établissement ou vérification de la connexion avec BDD Game
 database_connection()
