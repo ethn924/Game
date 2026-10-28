@@ -47,7 +47,14 @@ def convert_to_int(player_choice):
 #     L'énoncé stipule que la défense réduit les dégâts.
 #     Calculer les dégâts : attaque - defense
 #     Si le résultat est inférieur ou égal à 0, retourner 0 (pour éviter de soigner l'adversaire)
+# Certaines classes si évolution pourront se soigner en tuant des monstres
 #     Sinon, retourner le résultat
+def calculate_damage(attaque, defense):
+    result = attaque - defense
+    if result <= 0:
+        return 0
+    else:
+        return result
 
 
 # Sélection et validation du choix du joueur : fonction player_choice(max_options, error_function)

@@ -2,6 +2,7 @@ from db_init import *
 from utils import *
 from models import *
 import random
+import time
 
 
 # Fonction de lancement de la partie : start_game()
@@ -35,7 +36,7 @@ def start_game():
 
     player_team = create_team(heroes_list)
 
-    return player_name, player_team
+    combat_loop(player_name, player_team)
 
 
 # Sélection des personnages pour constituer une équipe : fonction create_team(heroes_list)
@@ -113,40 +114,105 @@ def show_scoreboard():
 
 
 # Phase 2 : COMBAT
-# Sélectionner un monstre aléatoire, fonction qui va être appelée à chaque nouvelle wave : SelectRandomMonster()
+# Sélectionner un monstre aléatoire, fonction qui va être appelée à chaque nouvelle wave : select_random_monster()
 # Fonction select_random_monster():
 #     Appeler get_all_monsters() (provenant de db_init.py) pour récupérer la liste des monstres
 #     Sélectionner un monstre au hasard dans la liste (en important le module random)
 #     Retourner le dictionnaire du monstre choisi avec ses caractéristiques propres
-
 def select_random_monster():
     monsters = get_all_monsters()
-    random_monster = random(monsters)
-    return {random_monster}
+    random_monster = random.choice(monsters)  # choice à add sinon ça plantait
+    return random_monster
 
 
 # Boucle de combat principale : combat_loop(player_name, player_team)
 #     Initialiser le compteur de vagues (waves) à 0
+#     Initialiser la variable defeat à False
 #     while True: (combat infini)
 #         Incrémenter le compteur de vagues
-#         Appeler SelectRandomMonster() pour récupérer le monstre de la vague
-#         Afficher le monstre et ses stats
-#         while True: (tour par tour tant que le monstre ou l'équipe est en vie)
-#             Les héros attaquent :
-#                 Pour chaque héros de l'équipe (s'il a des PV > 0) :
-#                     Calculer les dégâts avec calculate_damage(attaque_hero, defense_monstre) (provenant de utils.py)
+#         Appeler select_random_monster() et stocker le résultat dans monster
+#         Appeler display_combat_state(monster, player_team) pour afficher l'état
+#         Initialiser combat_ongoing à True
+#         while combat_ongoing: (tour par tour)
+#             PHASE D'ATTAQUE DES HÉROS
+#             Pour chaque héros de l'équipe :
+#                 Si les PV du héros sont > 0 :
+#                     Calculer les dégâts infligés au monstre
 #                     Soustraire les dégâts aux PV du monstre
-#                     Afficher les dégâts infligés
-#                     Si les PV du monstre <= 0 : Victoire, break la boucle de combat
-#             Si le monstre est mort : break pour passer à la vague suivante
-#             Le monstre attaque :
-#                 Choisir un héros au hasard parmi ceux en vie (PV > 0)
-#                 Calculer les dégâts avec calculate_damage(attaque_monstre, defense_hero)
-#                 Soustraire les dégâts aux PV du héros
-#                 Afficher les dégâts infligés
-#                 Si tous les héros sont morts (PV <= 0) : Défaite, break les deux boucles (while)
-#         Si défaite :
+#                     Afficher les dégâts
+#                     Si les PV du monstre sont <= 0 : combat_ongoing passe à False et break
+#             Si combat_ongoing est False : break pour passer à la vague suivante
+#             PHASE D'ATTAQUE DU MONSTRE
+#             Créer une liste alive_heroes des héros avec PV > 0
+#             Choisir un héros au hasard dans alive_heroes
+#             Calculer les dégâts du monstre sur ce héros
+#             Soustraire les dégâts aux PV du héros
+#             Afficher les dégâts
+#             VÉRIFICATION DE LA DÉFAITE
+#             Compter le nombre de héros en vie
+#             Si aucun héros n'est en vie : defeat passe à True et break
+#         Si defeat est True :
+#             Afficher le message de défaite
 #             Afficher le score final (nombre de vagues)
-#             Appeler save_score(player_name, waves - 1) (provenant de db_init.py)
-#             Appeler show_scoreboard() pour afficher le classement
-#             break pour quitter la boucle de combat et retourner au menu principal
+#             Appeler save_score(player_name, waves - 1)
+#             Appeler show_scoreboard()
+#             break pour quitter la boucle de combat
+def combat_loop(player_name, player_team):
+    waves = 0
+    defeat = False
+    while True:
+        waves += 1
+        monster = select_random_monster()
+        display_combat_state(monster, player_team)
+        time.sleep(2) # Ajout : Pause pour lire les stats du monstre
+
+        combat_ongoing = True
+
+        while combat_ongoing:
+            for name, hero_stats in player_team.items():
+                if hero_stats["pv"] > 0:
+                    hero_damage = calculate_damage(
+                        hero_stats["attaque"], monster["defense"]
+                    )
+                    monster["pv"] = monster["pv"] - hero_damage
+                    print("Dégâts infligés par le héro : ", hero_damage)
+                    if monster["pv"] <= 0:
+                        combat_ongoing = False
+                        break
+
+            if not combat_ongoing:
+                break
+
+            time.sleep(1) # Ajout : Pause après l'attaque des héros
+
+            alive_heroes = []
+
+            for name, hero_stats in player_team.items():
+                if hero_stats["pv"] > 0:
+                    alive_heroes.append((name, hero_stats))
+
+            target_name, target_hero = random.choice(alive_heroes)
+            monster_damage = calculate_damage(
+                monster["attaque"], target_hero["defense"]
+            )
+            target_hero["pv"] = target_hero["pv"] - monster_damage
+            print("Dégâts infligés par le monstre à", target_name, ":", monster_damage)
+
+            time.sleep(1) # Ajout : Pause après l'attaque du monstre
+
+            heroes_alive = 0
+            for name, stats in player_team.items():
+                if stats["pv"] > 0:
+                    heroes_alive += 1
+
+            if heroes_alive == 0:
+                defeat = True
+                break
+
+        if defeat == True:
+            print("TOUS VOS HÉROS SONT MORTS, LES MONSTRES ENVAHISSENT LE ROYAUME")
+            print("DÉFAITE !")
+            print("Score final : ", waves)
+            save_score(player_name, waves - 1)
+            show_scoreboard()
+            break

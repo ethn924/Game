@@ -53,7 +53,7 @@ def save_score(player_name, waves):
 # Fonction pour récupérer les héros : get_all_heroes()
 #     Se connecter à la BDD en appelant database_connection()
 #     Cible la collection heroes
-#     Effectuer un find en appliquant un filtre pour enlever le _id (ex: find({}, {"_id": 0}))
+#     Effectuer un find en appliquant un filtre pour enlever le _id
 #     Convertir le curseur MongoDB en liste heroes_list et la retourner
 def get_all_heroes():
     client, game = database_connection()  # Connexion BDD
